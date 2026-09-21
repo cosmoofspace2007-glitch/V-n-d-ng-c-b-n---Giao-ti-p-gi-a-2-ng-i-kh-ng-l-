@@ -1,0 +1,7 @@
+Grafana được triển khai bằng Docker Compose với port 3000:3000 và 
+cùng Docker network với Prometheus. Sau khi truy cập http://localhost:3000 và đăng nhập bằng tài khoản admin/admin,
+vào Connections → Data sources → Add data source → Prometheus. Tại trường URL nhập http://prometheus:9090.
+
+Không sử dụng http://localhost:9090 vì Grafana đang chạy trong một container riêng. Trong container Grafana, 
+localhost chỉ trỏ đến chính container Grafana. Docker Compose cung cấp cơ chế DNS nội bộ, 
+cho phép các service giao tiếp với nhau bằng tên service. Vì vậy Grafana phải sử dụng http://prometheus:9090 để kết nối tới service Prometheus trên cùng Docker network.
